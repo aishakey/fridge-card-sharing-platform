@@ -7,7 +7,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minLength: [6, "Password must be at least 6 characters long"],
-    maxLength: [32, "Password must be no more than 32 characters long"],
   },
   profilePicture: String,
   createdAt: { type: Date, default: Date.now },
@@ -20,5 +19,5 @@ const cardSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-export const User = mongoose.model("User", userSchema);
-export const Card = mongoose.model("Card", cardSchema);
+export const User = mongoose.models?.User || mongoose.model("User", userSchema);
+export const Card = mongoose.models?.Card || mongoose.model("Card", cardSchema);
