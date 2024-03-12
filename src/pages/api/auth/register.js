@@ -1,5 +1,5 @@
-import dbConnect from "@/lib/utils";
-import { User } from "@/lib/models";
+import conncectToDb from "@/utils/mongodb";
+import { User } from "../../../../models/User";
 import bcrypt from "bcryptjs";
 
 export default async function handler(req, res) {
@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     return res.status(405).end();
   }
 
-  await dbConnect();
+  await conncectToDb();
 
   const { username, email, password } = req.body;
 

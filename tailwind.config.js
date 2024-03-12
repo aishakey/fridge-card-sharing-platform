@@ -24,6 +24,10 @@ module.exports = {
         "cream-custom": "#FFF6DF",
         "cold-gray": "#E8E8E8",
       },
+      boxShadow: {
+        custom: "-1.5px 2px 0 0 #222020",
+        inner: "-1.5px 1px 0 0 #222020",
+      },
     },
   },
   plugins: [],

@@ -1,5 +1,5 @@
-import dbConnect from "@/lib/utils";
-import { User } from "@/lib/models";
+import conncectToDb from "@/utils/mongodb";
+import { User } from "../../../../models/User";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   }
 
   const { email, password } = req.body;
-  await dbConnect();
+  await conncectToDb();
 
   const user = await User.findOne({ email });
   if (!user) {
