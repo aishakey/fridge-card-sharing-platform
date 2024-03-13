@@ -15,6 +15,7 @@ module.exports = {
       colors: {
         "cherry-main": "#F94144",
         "bright-tangerine": "#F3722C",
+        "dark-tangerine": "#DD6A2C",
         "retro-yellow": "#F9C74F",
         "yellow-main": "#FFC12B",
         "retro-green": "#90BE6D",
@@ -26,6 +27,8 @@ module.exports = {
       },
       boxShadow: {
         custom: "-1.5px 2px 0 0 #222020",
+        large: "0px 4px 0 0 #222020",
+        light: "-1.5px 2px 0 0 #FFF6DF",
         inner: "-1.5px 1px 0 0 #222020",
       },
     },
