@@ -20,11 +20,11 @@ export default function UserReviews() {
   const nextIndex = (currentReview + 1) % reviews.length;
 
   return (
-    <div className="w-full py-14 px-6 flex flex-col items-center">
-      <h2 className="font-custom-heading text-4xl text-darkest-custom mb-12">
+    <div className="w-full py-14 px-4 sm:px-6 flex flex-col items-center">
+      <h2 className="font-custom-heading text-2xl sm:text-3xl md:text-4xl text-darkest-custom mb-12 text-center">
         Kind Words Corner
       </h2>
-      <div className="bg-retro-yellow p-6 mt-10 mb-6 rounded shadow-large border-2 border-darkest-custom max-w-2xl relative min-h-[24rem] flex flex-col justify-between">
+      <div className="bg-retro-yellow p-4 sm:p-6 rounded shadow-large border-2 border-darkest-custom max-w-xl md:max-w-2xl relative min-h-[20rem] md:min-h-[24rem] flex flex-col justify-between">
         {/* Left arrow */}
         <button
           onClick={prevReview}
@@ -42,9 +42,9 @@ export default function UserReviews() {
         </button>
 
         {/* Avatars */}
-        <div className="flex justify-center items-center -mt-20">
+        <div className="flex justify-center items-center -mt-16 md:-mt-20">
           {/* Previous avatar */}
-          <div className="relative rounded-full border-2 border-darkest-custom bg-white w-16 h-16 p-1 z-10 -mr-4">
+          <div className="relative rounded-full border-2 border-darkest-custom bg-white w-12 h-12 md:w-16 md:h-16 p-1 z-10 -mr-2 md:-mr-4">
             <Image
               src={reviews[prevIndex].img}
               alt={reviews[prevIndex].name}
@@ -54,7 +54,8 @@ export default function UserReviews() {
             />
           </div>
           {/* Current avatar */}
-          <div className="relative rounded-full border-2 border-darkest-custom bg-white w-24 h-24 p-2 z-20">
+          <div className="relative rounded-full border-2 border-darkest-custom bg-white w-16 h-16 md:w-24 md:h-24 p-2 z-20">
+            {" "}
             <Image
               src={reviews[currentReview].img}
               alt={reviews[currentReview].name}
@@ -64,7 +65,7 @@ export default function UserReviews() {
             />
           </div>
           {/* Next avatar */}
-          <div className="relative rounded-full border-2 border-darkest-custom bg-white w-16 h-16 p-1 z-10 -ml-4">
+          <div className="relative rounded-full border-2 border-darkest-custom bg-white w-12 h-12 md:w-16 md:h-16 p-1 z-10 -ml-2 md:-ml-4">
             <Image
               src={reviews[nextIndex].img}
               alt={reviews[nextIndex].name}
@@ -91,9 +92,11 @@ export default function UserReviews() {
         </button>
 
         {/* Review text */}
-        <div className="flex-grow flex flex-col justify-center items-center px-10">
-          <p className="text-lg text-center">{reviews[currentReview].text}</p>
-          <p className="font-bold text-xl mt-4 text-center text-darkest-custom">
+        <div className="flex-grow flex flex-col justify-center items-center px-2 sm:px-10">
+          <p className="text-base sm:text-lg text-center">
+            {reviews[currentReview].text}
+          </p>
+          <p className="font-bold text-lg sm:text-xl mt-4 text-center text-darkest-custom">
             {reviews[currentReview].name}
           </p>
         </div>

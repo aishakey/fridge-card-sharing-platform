@@ -28,6 +28,8 @@ module.exports = {
       boxShadow: {
         custom: "-1.5px 2px 0 0 #222020",
         large: "0px 4px 0 0 #222020",
+        med: "-2.5px 2.5px 0 0 #222020",
+        medl: "-2.5px 2.5px 0 0 #FFF6DF",
         light: "-1.5px 2px 0 0 #FFF6DF",
         inner: "-1.5px 1px 0 0 #222020",
       },
