@@ -7,7 +7,7 @@ export default function AboutPage() {
         <Image
           src="/about-fridge.svg"
           alt="Green fridge"
-          width={300}
+          width={320}
           height={200}
           layout="intrinsic"
         />
@@ -26,7 +26,7 @@ export default function AboutPage() {
             digital realm.
           </p>
         </div>
-        <div className="flex flex-col justify-center items-center bg-cream-custom p-4 sm:p-6 rounded shadow-med border-2 border-darkest-custom">
+        <div className="flex flex-col mt-4 justify-center items-center bg-cream-custom p-4 sm:p-6 rounded shadow-med border-2 border-darkest-custom">
           <p className="text-base sm:text-lg">
             Our mission is to empower people to express themselves creatively,
             celebrate life's moments, and strengthen relationships through the
