@@ -1,9 +1,20 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const isAuthenticated = false; // This should be dynamically set based on  auth logic
 
 export default function Navbar() {
+  const pathname = usePathname();
+
+  const hideOnRoutes = ["/login", "/register"];
+
+  if (hideOnRoutes.includes(pathname)) {
+    return null;
+  }
+
   return (
     <nav className="flex items-center justify-between px-8 py-4">
       <Link href="/" passHref>
