@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import AuthLayout from "@/components/auth-layout/AuthLayout";
 import Image from "next/image";
@@ -12,31 +12,35 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      router.replace("/my-profile");
+    }
+  }, [session, router]);
+
+  if (session) return null; //switch to loader
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    //Login with credentials
-    const res = await fetch("api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+    const result = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
     });
 
-    const data = await res.json();
-
-    if (!res.ok) {
-      setError(data.message || "An error occurred");
+    if (result?.error) {
+      console.error("Login error:", result.error);
+      setError(result.error);
     } else {
-      router.push("/my-profile");
+      router.replace("/my-profile");
     }
   };
 
   const handleLoginWithGoogle = async () => {
-    const result = await signIn("google", { callbackUrl: "/" });
-    if (result.error) {
-      setError(result.error);
-    }
+    await signIn("google", { callbackUrl: "/my-profile" });
   };
 
   return (
@@ -76,8 +80,7 @@ export default function LoginPage() {
         </form>
         {error && <p className="text-red-600">{error}</p>}
         <div className="text-center">
-          <p className="text-[#787878] my-4 text-lg">or</p>
-
+          <p className="text-[#787878] my-4 text-lg">- or -</p>
           <button
             onClick={handleLoginWithGoogle}
             className="w-full py-4 bg-[#FED4C2] hover:bg-red-200 text-darkest-custom font-semibold rounded-lg flex justify-center items-center gap-4"

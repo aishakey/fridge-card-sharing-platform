@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import AuthLayout from "@/components/auth-layout/AuthLayout";
 import Link from "next/link";
 import Image from "next/image";
@@ -13,22 +13,36 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      router.push("/my-profile");
+    }
+  }, [session, router]);
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("/api/auth/register", {
+    const response = await fetch("/api/register", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ username, email, password }),
     });
-    const data = await res.json();
 
-    if (!res.ok) {
-      setError(data.message || "An error occurred");
-    } else {
+    const data = await response.json();
+    if (response.ok) {
+      console.log("Registration successful:", data);
       router.push("/my-profile");
+    } else {
+      setError(data.error || "An error occurred");
     }
+  };
+
+  const handleRegisterWithGoogle = async () => {
+    signIn("google", { callbackUrl: "/my-profile" });
   };
 
   return (
@@ -45,7 +59,7 @@ export default function RegisterPage() {
         <hr className="pb-6" />
         <form onSubmit={handleRegister} className="space-y-6">
           <input
-            type="username"
+            type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
@@ -78,7 +92,7 @@ export default function RegisterPage() {
           <p className="text-[#787878] my-4 text-lg">or</p>
 
           <button
-            onClick={handleRegister} //change to with Google
+            onClick={handleRegisterWithGoogle}
             className="w-full py-4 bg-[#FED4C2] hover:bg-red-200 text-darkest-custom font-semibold rounded-lg flex justify-center items-center gap-4 mb-6"
           >
             <Image src="/google.svg" alt="Google" width={20} height={20} />

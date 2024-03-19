@@ -36,7 +36,7 @@ export default function UserReviews() {
             alt="Previous"
             width={40}
             height={40}
-            layout="fixed"
+            fixed="true"
             className="scale-x-[-1]"
           />
         </button>
@@ -48,8 +48,10 @@ export default function UserReviews() {
             <Image
               src={reviews[prevIndex].img}
               alt={reviews[prevIndex].name}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{
+                objectFit: "cover",
+              }}
               className="rounded-full p-2"
             />
           </div>
@@ -59,8 +61,10 @@ export default function UserReviews() {
             <Image
               src={reviews[currentReview].img}
               alt={reviews[currentReview].name}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{
+                objectFit: "cover",
+              }}
               className="rounded-full p-2"
             />
           </div>
@@ -69,8 +73,10 @@ export default function UserReviews() {
             <Image
               src={reviews[nextIndex].img}
               alt={reviews[nextIndex].name}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{
+                objectFit: "cover",
+              }}
               className="rounded-full p-2"
             />
           </div>
@@ -87,7 +93,7 @@ export default function UserReviews() {
             alt="Next"
             width={40}
             height={40}
-            layout="fixed"
+            fixed="true"
           />
         </button>
 

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connection = { isConnected: null };
 
-async function conncectToDb() {
+async function connectToDb() {
   if (connection.isConnected) {
     console.log("Using existing database connection");
     return;
@@ -18,4 +18,4 @@ async function conncectToDb() {
   }
 }
 
-export default conncectToDb;
+export default connectToDb;

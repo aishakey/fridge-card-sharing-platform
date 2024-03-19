@@ -3,16 +3,24 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-
-const isAuthenticated = false; // This should be dynamically set based on  auth logic
+import { useSession, signOut } from "next-auth/react";
 
 export default function Navbar() {
+  const { data: session, status: sessionStatus } = useSession();
+  const isAuthenticated = sessionStatus === "authenticated";
+  console.log("status", sessionStatus);
+  console.log("session", session);
+
   const pathname = usePathname();
 
   const hideOnRoutes = ["/login", "/register"];
 
   if (hideOnRoutes.includes(pathname)) {
     return null;
+  }
+
+  if (sessionStatus === "loading") {
+    return <div>Loading...</div>; // switch to loader
   }
 
   return (
@@ -55,8 +63,10 @@ export default function Navbar() {
       {/* Authentication Button */}
       <div>
         {isAuthenticated ? (
-          // Adjust as necessary to handle sign-out functionality
-          <button className="custom-button text-darkest-custom">
+          <button
+            onClick={() => signOut()}
+            className="custom-button text-darkest-custom"
+          >
             Sign out
           </button>
         ) : (

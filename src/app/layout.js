@@ -1,6 +1,8 @@
 import "../styles/globals.css";
 import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/navbar/Navbar";
+import { getServerSession } from "next-auth";
+import AuthProvider from "@/utils/SessionProvider";
 
 export const metadata = {
   title: {
@@ -10,14 +12,17 @@ export const metadata = {
   description: "Next.js starter app description",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession();
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-      </body>
+      <AuthProvider session={session}>
+        <body className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </body>
+      </AuthProvider>
     </html>
   );
 }
