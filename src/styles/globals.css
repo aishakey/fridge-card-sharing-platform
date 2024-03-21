@@ -39,3 +39,43 @@ input:focus {
   -webkit-text-stroke: 2px #222020;
   text-stroke: 2px #222020;
 }
+
+.candy-first {
+  top: 30.7%;
+  left: 57.9%;
+  transform: translate(-50%, -50%);
+}
+
+.candy-second {
+  top: 45.8%;
+  left: 58%;
+  transform: translate(-50%, -50%);
+}
+
+.candy-third {
+  top: 60.8%;
+  left: 58.1%;
+  transform: translate(-50%, -50%);
+}
+
+.smooth-transition {
+  transition: opacity 0.2s ease-in-out;
+  opacity: 1;
+}
+
+@media (min-width: 900px) {
+  .candy-first {
+    top: 30.7%;
+    left: 55.2%;
+  }
+
+  .candy-second {
+    top: 46%;
+    left: 55.4%;
+  }
+
+  .candy-third {
+    top: 61%;
+    left: 55.4%;
+  }
+}

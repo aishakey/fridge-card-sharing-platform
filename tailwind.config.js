@@ -12,6 +12,9 @@ module.exports = {
         "custom-paragraph": ["Quicksand", "sans-serif"],
         "custom-extra": ["Indie Flower", "sans-serif"],
       },
+      fontSize: {
+        xxs: ".625rem",
+      },
       colors: {
         "cherry-main": "#F94144",
         "bright-tangerine": "#F3722C",
