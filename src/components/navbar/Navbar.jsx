@@ -23,7 +23,7 @@ export default function Navbar() {
   const logoImageSrc = isSpecialColorRoute ? "/brand-white.svg" : "/brand.svg";
 
   const navbarClasses = isSpecialColorRoute
-    ? "flex items-center justify-between px-8 py-4 bg-darkest-custom"
+    ? "flex items-center justify-between px-8 py-4 bg-darker-custom"
     : "flex items-center justify-between px-8 py-4"; // Default styles
 
   const linkClasses = isSpecialColorRoute

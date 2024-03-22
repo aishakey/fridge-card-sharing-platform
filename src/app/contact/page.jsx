@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function ContactPage() {
   return (
-    <div className="w-full min-h-screen bg-darkest-custom flex flex-col items-center pt-6 pb-24">
+    <div className="w-full min-h-screen bg-darker-custom flex flex-col items-center pt-6 pb-24">
       <h1 className="text-center font-custom-heading text-cream-custom text-3xl sm:text-4xl md:text-5xl custom-stroke mb-6">
         Let's get in touch
       </h1>
@@ -55,7 +55,7 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-        <div className="bg-darker-custom min-w-[29rem] max-h-[30rem] p-10 mt-12 rounded-lg shadow-medl border-2 border-cream-custom flex flex-col items-center justify-center max-w-md">
+        <div className="bg-dark-custom min-w-[29rem] max-h-[30rem] p-10 md:mt-12 rounded-lg shadow-medl border-2 border-cream-custom flex flex-col items-center justify-center max-w-md">
           <h2 className="text-2xl font-semibold mb-6 text-cream-custom">
             Contact Us
           </h2>
@@ -90,7 +90,7 @@ export default function ContactPage() {
             {/* Submit button */}
             <div className="text-center">
               <button
-                className="custom-button px-16 bg-yellow-main"
+                className="custom-button px-16 bg-yellow-main hover:bg-retro-yellow"
                 type="submit"
               >
                 Send
