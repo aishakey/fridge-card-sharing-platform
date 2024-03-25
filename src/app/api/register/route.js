@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
-import connectToDb from "@/utils/mongodb"; // Adjust import paths as needed
-import { User } from "@/models/User"; // Adjust import paths as needed
+import connectToDb from "@/utils/mongodb";
+import { User } from "@/models/User";
 import bcrypt from "bcryptjs";
 
-export async function POST(request) {
+export async function POST(req) {
   try {
     await connectToDb();
-    const { username, email, password } = await request.json();
+    const { username, email, password } = await req.json();
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {

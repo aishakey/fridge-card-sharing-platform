@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProgressTracker from "@/components/progress-tracker/ProgressTracker";
 import CreateCard from "@/components/create-card/CreateCard";
 import ChooseRecipient from "@/components/choose-recipient/ChooseRecipient";
@@ -13,8 +13,12 @@ export default function SendCardPage() {
   const [cardData, setCardData] = useState({
     image: null,
     text: "",
-    recipient: "",
+    recipients: [],
   });
+
+  useEffect(() => {
+    console.log("Current card data:", cardData);
+  }, [cardData]);
 
   const nextStep = () =>
     setCurrentStep((prev) => Math.min(prev + 1, stepComponents.length - 1));
@@ -27,7 +31,7 @@ export default function SendCardPage() {
   const CurrentStepComponent = stepComponents[currentStep];
 
   return (
-    <div className="bg-darker-custom min-h-screen">
+    <div className="bg-darker-custom">
       <ProgressTracker currentStep={currentStep} />
       <CurrentStepComponent
         onNext={nextStep}
