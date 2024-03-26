@@ -73,9 +73,7 @@ export default function ChooseRecipient({
 
   return (
     <div className="flex flex-col items-center mt-20 md:mt-32 pb-28 md:pb-56 space-y-10 md:mr-6">
-      {error && (
-        <div className="text-red-500 -mt-6 md:-mt-24 mb-4">{error}</div>
-      )}
+      {error && <div className="text-red-500 -mt-6 mb-4">{error}</div>}
       <p className="text-2xl text-center text-cream-custom mb-4">
         Send the card to:
       </p>

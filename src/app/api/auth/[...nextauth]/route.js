@@ -36,7 +36,11 @@ export const authOptions = {
           throw new Error("Password is incorrect");
         }
         console.log("Authentication successful for user", credentials.email);
-        return { id: user.id, name: user.username, email: user.email };
+        return {
+          id: user.id.toString(),
+          name: user.username,
+          email: user.email,
+        };
       },
     }),
   ],

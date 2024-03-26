@@ -16,7 +16,7 @@ export default async function MyFridgePage() {
           href="/my-cards"
           className="w-3/5 py-2 md:py-3 md:w-1/2 custom-button"
         >
-          Delivered Cards
+          Received Cards
         </Link>
         <Link
           href="/send-card"
@@ -24,11 +24,12 @@ export default async function MyFridgePage() {
         >
           Send Card
         </Link>
+
         <Link
           href="/my-cards"
           className="w-3/5 py-2 md:py-3 md:w-1/2 custom-button"
         >
-          Received Cards
+          Delivered Cards
         </Link>
       </div>
       <div className="flex justify-center w-full md:order-1">

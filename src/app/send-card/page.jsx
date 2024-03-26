@@ -5,6 +5,8 @@ import ProgressTracker from "@/components/progress-tracker/ProgressTracker";
 import CreateCard from "@/components/create-card/CreateCard";
 import ChooseRecipient from "@/components/choose-recipient/ChooseRecipient";
 import ReviewSend from "@/components/review-send/ReviewSend";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const stepComponents = [CreateCard, ChooseRecipient, ReviewSend];
 
@@ -15,6 +17,11 @@ export default function SendCardPage() {
     text: "",
     recipients: [],
   });
+
+  const { status: sessionStatus } = useSession();
+  if (sessionStatus !== "authenticated") {
+    redirect("/");
+  }
 
   useEffect(() => {
     console.log("Current card data:", cardData);

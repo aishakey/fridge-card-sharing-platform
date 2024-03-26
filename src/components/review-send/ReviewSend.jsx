@@ -2,15 +2,39 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function ReviewSend({ onPrev, cardData }) {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const router = useRouter();
 
-  const handleConfirmAndSend = () => {
-    // Logic to send the card goes here
-    setShowSuccessModal(true);
+  const handleConfirmAndSend = async () => {
+    try {
+      const cardResponse = await fetch("/api/send-card", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          image: cardData.image,
+          text: cardData.text,
+          recipients: cardData.recipients,
+        }),
+      });
 
-    //navigate to a new page
+      if (!cardResponse.ok) {
+        throw new Error("Failed to send the card.");
+      }
+
+      setShowSuccessModal(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleCloseSuccessModal = () => {
+    setShowSuccessModal(false);
+    router.push("/my-fridge");
   };
 
   return (
@@ -27,12 +51,12 @@ export default function ReviewSend({ onPrev, cardData }) {
       )}
 
       {cardData.text && (
-        <div className="text-center text-cream-custom text-sm md:text-md pt-6 pb-6">
+        <div className="text-center text-cream-custom text-sm md:text-md pt-6 pb-2">
           {cardData.text}
         </div>
       )}
 
-      <div className="w-full flex flex-wrap justify-center items-center pb-8">
+      <div className="w-full flex flex-wrap justify-center items-center pt-2 pb-8">
         <div className="text-center text-cream-custom font-bold mr-4">To:</div>
         <div className="flex flex-wrap justify-center gap-2">
           {cardData.recipients.map((recipient, index) => (
@@ -62,8 +86,8 @@ export default function ReviewSend({ onPrev, cardData }) {
             <p>Your card has been successfully sent.</p>
             <div className="mt-4 flex justify-center">
               <button
-                onClick={() => setShowSuccessModal(false)}
-                className="button bg-green-500 hover:bg-green-700 text-white"
+                onClick={handleCloseSuccessModal}
+                className="custom-button px-4 py-2 bg-bright-tangerine hover:bg-dark-tangerine text-white"
               >
                 Ok
               </button>
