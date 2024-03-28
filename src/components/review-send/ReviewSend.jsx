@@ -46,6 +46,7 @@ export default function ReviewSend({ onPrev, cardData }) {
             alt="Card Image"
             layout="fill"
             objectFit="contain"
+            unoptimized={true}
           />
         </div>
       )}

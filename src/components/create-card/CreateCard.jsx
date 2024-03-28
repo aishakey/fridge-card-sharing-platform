@@ -1,9 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useS3Upload } from "next-s3-upload";
 import Image from "next/image";
 
 export default function CreateCard({ onNext, onCardDataChange, cardData }) {
+  let { FileInput, uploadToS3 } = useS3Upload();
+
   const placeholderIcon = "/photo-icon.svg";
   const [imagePreview, setImagePreview] = useState(
     cardData.image || placeholderIcon
@@ -11,25 +14,30 @@ export default function CreateCard({ onNext, onCardDataChange, cardData }) {
   const [imageSelected, setImageSelected] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [tempText, setTempText] = useState(cardData.text);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // If cardData has an image but no local preview is set, update the preview
     if (cardData.image && !imagePreview) {
       setImagePreview(cardData.image);
     }
   }, [cardData.image, imagePreview]);
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
+  const handleFileChange = async (file) => {
+    setIsLoading(true);
     if (file && file.type === "image/jpeg") {
-      const fileUrl = URL.createObjectURL(file);
-      setImagePreview(fileUrl);
-      onCardDataChange({ ...cardData, image: fileUrl });
-      setImageSelected(true);
-      setError("");
+      try {
+        let { url } = await uploadToS3(file);
+        setImagePreview(url);
+        onCardDataChange({ ...cardData, image: url, imageName: file.name });
+        setImageSelected(true);
+        setError("");
+      } finally {
+        setIsLoading(false);
+      }
     } else {
       setError("Please select a JPEG image.");
+      setIsLoading(false);
     }
   };
 
@@ -55,7 +63,9 @@ export default function CreateCard({ onNext, onCardDataChange, cardData }) {
       {error && <div className="text-cherry-main">{error}</div>}
       <div className="flex flex-col md:flex-row w-full max-w-xl justify-center items-center gap-4">
         <div className="h-80 w-full relative bg-dark-custom border-2 shadow-medl rounded-lg flex justify-center items-center">
-          {imagePreview === placeholderIcon ? (
+          {isLoading ? (
+            <div className="text-cream-custom text-xl">Loading...</div>
+          ) : imagePreview === placeholderIcon ? (
             <Image
               src={imagePreview}
               alt="Card preview"
@@ -69,7 +79,7 @@ export default function CreateCard({ onNext, onCardDataChange, cardData }) {
               layout="fill"
               objectFit="contain"
             />
-          )}{" "}
+          )}
         </div>
         <button onClick={handleNext} className="self-center mt-6 md:mt-0">
           <Image
@@ -83,10 +93,9 @@ export default function CreateCard({ onNext, onCardDataChange, cardData }) {
       <div className="flex flex-col gap-4 md:flex-row md:gap-8 pb-20 pt-8 md:pt-16 w-3/5 justify-center md:mr-12">
         <label className="mt-2 custom-button px-14 py-2 md:py-1">
           Choose File
-          <input
-            type="file"
-            accept="image/jpeg"
+          <FileInput
             onChange={handleFileChange}
+            accept="image/jpeg"
             className="hidden"
             required
           />
