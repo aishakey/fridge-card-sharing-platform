@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import UserReviews from "@/components/userReviews/UserReviews";
+import { getServerSession } from "next-auth";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const session = await getServerSession();
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen text-center mt-4">
+    <div className="flex flex-col items-center justify-center min-h-screen text-center mt-8">
       {/* Heading */}
       <h1 className="font-custom-heading text-cream-custom text-4xl sm:text-5xl custom-stroke leading-tight">
         Create, Share, and Display
@@ -18,12 +21,15 @@ export default function HomePage() {
 
       {/*Buttons*/}
       <div className="flex flex-col sm:flex-row sm:justify-start gap-4 mt-6">
-        <Link href="/register" className="custom-button px-4 py-2">
-          Create an account
+        <Link
+          href={session ? "/my-profile" : "/register"}
+          className="custom-button px-2 py-1 w-64 text-center"
+        >
+          {session ? "My profile" : "Create an account"}
         </Link>
         <Link
           href="/about"
-          className="custom-button px-4 py-2 bg-retro-yellow hover:bg-yellow-main"
+          className="custom-button px-2 py-1 bg-retro-yellow hover:bg-yellow-main w-64 text-center"
         >
           Learn more about
         </Link>

@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function HomePage() {
+export default async function MyProfile() {
   const session = await getServerSession();
 
   if (!session) {
@@ -19,7 +19,10 @@ export default async function HomePage() {
         </Link>
       </div>
       <div className="absolute candy-second">
-        <Link href="/my-cards" className="smooth-transition hover:opacity-50">
+        <Link
+          href="/received-cards"
+          className="smooth-transition hover:opacity-50"
+        >
           My Cards
         </Link>
       </div>

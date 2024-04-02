@@ -1,22 +1,37 @@
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+"use client";
+
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function MyFridgePage() {
-  const session = await getServerSession();
+  // const [unviewedCount, setUnviewedCount] = useState(0);
+  // const { status: sessionStatus } = useSession();
 
-  if (!session) {
-    redirect("/");
-  }
+  // useEffect(() => {
+  //   if (sessionStatus === "authenticated") {
+  //     fetch("/api/cards/unviewed-count")
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         setUnviewedCount(data.count);
+  //       })
+  //       .catch((error) =>
+  //         console.error("Error fetching unviewed cards count:", error)
+  //       );
+  //   }
+  // }, [sessionStatus]); review
+
   return (
     <div className="flex flex-col mt-6 md:mt-4 md:flex-row md:justify-around items-center px-10">
       <div className="flex flex-col gap-6 md:gap-14 mb-12 md:mb-0 items-center w-full md:order-2">
         <Link
-          href="/my-cards"
+          href="/received-cards"
           className="w-3/5 py-2 md:py-3 md:w-1/2 custom-button"
         >
-          Received Cards
+          {/* Received Cards{unviewedCount > 0 ? ` (${unviewedCount})` : ""} */}{" "}
+          review
         </Link>
         <Link
           href="/send-card"
@@ -26,7 +41,7 @@ export default async function MyFridgePage() {
         </Link>
 
         <Link
-          href="/my-cards"
+          href="/sent-cards"
           className="w-3/5 py-2 md:py-3 md:w-1/2 custom-button"
         >
           Delivered Cards
