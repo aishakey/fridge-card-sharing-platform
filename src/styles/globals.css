@@ -63,6 +63,15 @@ input:focus {
   opacity: 1;
 }
 
+.fridge-image-wrapper {
+  position: relative;
+  margin: auto;
+}
+
+.placeholder {
+  position: absolute;
+}
+
 @media (min-width: 900px) {
   .candy-first {
     top: 30.7%;

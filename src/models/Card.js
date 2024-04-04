@@ -8,7 +8,6 @@ const cardSchema = new mongoose.Schema({
   sentTime: { type: Date, required: true, default: Date.now },
   image: { type: String, required: true },
   text: { type: String, required: false },
-  viewed: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
 });
 

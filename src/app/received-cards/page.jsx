@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useFridgeCards } from "@/utils/FridgeCardsContext";
 
 export default function ReceivedCards() {
   const [cards, setCards] = useState([]);
@@ -11,6 +12,7 @@ export default function ReceivedCards() {
   const [fullscreenImage, setFullscreenImage] = useState(null);
   const { status: sessionStatus } = useSession();
   const router = useRouter();
+  const { fridgeCards, addCardToFridge } = useFridgeCards();
 
   useEffect(() => {
     if (sessionStatus === "unauthenticated") {
@@ -36,6 +38,21 @@ export default function ReceivedCards() {
 
   const closeFullscreen = () => {
     setFullscreenImage(null);
+  };
+
+  const handlePlaceOnFridge = (card) => {
+    const isConfirmed = window.confirm(
+      "Do you want to place this card on the fridge?"
+    );
+    if (isConfirmed) {
+      const placeholderIndex = fridgeCards.length;
+      if (placeholderIndex < 5) {
+        addCardToFridge({ ...card, placeholderIndex });
+        router.push("/my-fridge");
+      } else {
+        alert("You can only place a maximum of 5 cards on the fridge.");
+      }
+    }
   };
 
   const deleteCard = async (cardId) => {
@@ -131,7 +148,11 @@ export default function ReceivedCards() {
                   height={24}
                 />
               </button>
-              <button type="button" className="focus:outline-none">
+              <button
+                type="button"
+                onClick={() => handlePlaceOnFridge(card)}
+                className="focus:outline-none"
+              >
                 <Image src="/send-icon.svg" alt="Send" width={26} height={26} />
               </button>
             </div>
