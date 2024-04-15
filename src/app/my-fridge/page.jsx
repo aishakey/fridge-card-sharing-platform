@@ -13,8 +13,22 @@ export default function MyFridgePage() {
   const [hoveredImageIndex, setHoveredImageIndex] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedCardId, setSelectedCardId] = useState(null);
+  const [unseenCount, setUnseenCount] = useState(0);
   const { status: sessionStatus } = useSession();
   const router = useRouter();
+
+  const fetchUnseenCount = () => {
+    if (sessionStatus === "authenticated") {
+      fetch("/api/cards/count-unseen")
+        .then((response) => response.json())
+        .then((data) => {
+          setUnseenCount(data.count);
+        })
+        .catch((error) =>
+          console.error("Error fetching unseen card count:", error)
+        );
+    }
+  };
 
   useEffect(() => {
     if (sessionStatus === "unauthenticated") {
@@ -22,6 +36,19 @@ export default function MyFridgePage() {
       return;
     }
   }, [sessionStatus, router]);
+
+  useEffect(() => {
+    fetchUnseenCount();
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        fetchUnseenCount();
+      }
+    });
+
+    return () => {
+      document.removeEventListener("visibilitychange", fetchUnseenCount);
+    };
+  }, [sessionStatus]);
 
   if (sessionStatus === "loading") {
     return (
@@ -41,9 +68,14 @@ export default function MyFridgePage() {
       <div className="flex flex-col gap-6 md:gap-14 mb-12 md:mb-0 items-center w-full md:order-2">
         <Link
           href="/received-cards"
-          className="w-3/5 py-2 md:py-3 md:w-1/2 custom-button"
+          className="w-3/5 py-2 md:py-3 md:w-1/2 custom-button flex justify-center items-center"
         >
           Received Cards
+          {unseenCount > 0 && (
+            <span className="ml-2 h-6 w-6 rounded-full border-2 border-dashed border-bright-tangerine flex justify-center items-center text-base">
+              {unseenCount}
+            </span>
+          )}
         </Link>
         <Link
           href="/send-card"

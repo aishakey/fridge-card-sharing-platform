@@ -8,6 +8,7 @@ const cardSchema = new mongoose.Schema({
   sentTime: { type: Date, required: true, default: Date.now },
   image: { type: String, required: true },
   text: { type: String, required: false },
+  seenBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   createdAt: { type: Date, default: Date.now },
 });
 

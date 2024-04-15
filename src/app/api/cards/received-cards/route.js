@@ -12,11 +12,16 @@ export async function GET(req) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
+  const userId = session.user.id;
   try {
-    const userId = session.user.id;
     const receivedCards = await Card.find({ recipients: userId })
       .populate("sender")
       .exec();
+
+    await Card.updateMany(
+      { _id: { $in: receivedCards.map((card) => card._id) } },
+      { $addToSet: { seenBy: userId } }
+    ).exec();
 
     return NextResponse.json(receivedCards, { status: 200 });
   } catch (error) {
