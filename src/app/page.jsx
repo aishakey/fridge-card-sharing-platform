@@ -31,7 +31,7 @@ export default async function HomePage() {
           href="/about"
           className="custom-button px-2 py-1 bg-retro-yellow hover:bg-yellow-main w-64 text-center"
         >
-          Learn more about
+          Learn more
         </Link>
       </div>
 
@@ -60,20 +60,20 @@ export default async function HomePage() {
       {/* Text block */}
       <div className="bg-cream-custom mt-14 w-full flex justify-center">
         <div className="w-11/12 flex flex-col items-center text-center my-10">
-          <h1 className="text-darkest-custom font-custom-heading text-3xl sm:text-4xl md:text-5xl leading-snug sm:leading-normal md:leading-relaxed">
-            Discover the magic of creating{" "}
-            <span className="text-cherry-main">
-              personalized birthday websites{" "}
-            </span>
-            for friends with our{" "}
-            <span className="text-cherry-main">exclusive membership.</span>{" "}
-            Spread joy and celebrate special moments with those who matter most.
+          <h1 className="text-darkest-custom font-custom-heading text-2xl sm:text-4xl md:text-5xl leading-snug sm:leading-normal md:leading-relaxed">
+            Join a community where{" "}
+            <span className="text-cherry-main">creativity</span> meets
+            <span className="text-cherry-main"> connection.</span> Share your
+            moments and discover a world of inspiration.{" "}
+            <span className="text-cherry-main">Connect with friends </span>
+            and loved ones by sending heartfelt cards that make every occasion
+            special.
           </h1>
           <Link
             href="/register"
-            className="custom-button mt-4 bg-yellow-main px-4 py-2 hover:bg-retro-yellow"
+            className="custom-button mt-4 bg-yellow-main px-8 py-2 text-xl hover:bg-retro-yellow"
           >
-            Check out membership
+            Find out more
           </Link>
         </div>
       </div>

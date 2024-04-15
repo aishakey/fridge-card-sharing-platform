@@ -16,7 +16,7 @@ export default function AboutPage() {
         <h1 className="text-center font-custom-heading text-cream-custom text-3xl sm:text-4xl md:text-5xl custom-stroke">
           About Fridge
         </h1>
-        <div className="flex flex-col justify-center items-center bg-cream-custom p-4 sm:p-6 rounded shadow-med border-2 border-darkest-custom">
+        <div className="flex flex-col justify-center items-center bg-cream-custom p-4 sm:p-6 md:p-10 rounded shadow-med border-2 border-darkest-custom leading-loose">
           <p className="text-base sm:text-lg">
             At Fridge, we believe in the power of meaningful connections. Our
             journey began with a simple idea: to create a platform that makes it
@@ -25,9 +25,7 @@ export default function AboutPage() {
             personalized card, our team set out to bring that same magic to the
             digital realm.
           </p>
-        </div>
-        <div className="flex flex-col mt-4 justify-center items-center bg-cream-custom p-4 sm:p-6 rounded shadow-med border-2 border-darkest-custom">
-          <p className="text-base sm:text-lg">
+          <p className="text-base sm:text-lg mt-4">
             Our mission is to empower people to express themselves creatively,
             celebrate life's moments, and strengthen relationships through the
             art of greeting cards. We're passionate about providing a seamless

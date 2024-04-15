@@ -7,10 +7,10 @@ import { FridgeCardsProvider } from "@/utils/FridgeCardsContext";
 
 export const metadata = {
   title: {
-    default: "Next.js 14 Homepage",
-    template: "%s | Next.js 14",
+    default: "Fridge",
+    template: "%s | Fridge",
   },
-  description: "Next.js starter app description",
+  description: "Fridge - Card Sharing Platform",
 };
 
 export default async function RootLayout({ children }) {
