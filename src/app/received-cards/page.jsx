@@ -12,7 +12,8 @@ export default function ReceivedCards() {
   const [fullscreenImage, setFullscreenImage] = useState(null);
   const { status: sessionStatus } = useSession();
   const router = useRouter();
-  const { fridgeCards, addCardToFridge } = useFridgeCards();
+  const { fridgeCards, addCardToFridge, removeCardFromFridge } =
+    useFridgeCards();
 
   useEffect(() => {
     if (sessionStatus === "unauthenticated") {
@@ -72,8 +73,9 @@ export default function ReceivedCards() {
         throw new Error("Failed to delete the card.");
       }
 
+      removeCardFromFridge(cardId);
+
       setCards((currentCards) => {
-        console.log("Deleting card ID:", cardId);
         return currentCards.filter((card) => card._id.toString() !== cardId);
       });
 
@@ -109,7 +111,11 @@ export default function ReceivedCards() {
         {cards.map((card) => (
           <div
             key={card._id}
-            className="bg-cream-custom shadow-lg rounded-lg overflow-hidden"
+            className={`bg-cream-custom shadow-lg rounded-lg overflow-hidden ${
+              fridgeCards.some((fridgeCard) => fridgeCard._id === card._id)
+                ? "bg-gray-400"
+                : ""
+            }`}
           >
             <div
               className="relative group cursor-pointer"
@@ -121,7 +127,11 @@ export default function ReceivedCards() {
                 alt="Received Card"
                 layout="fill"
                 objectFit="cover"
-                className="transition-opacity duration-500 ease-in-out group-hover:opacity-75"
+                className={`transition-opacity duration-500 ease-in-out group-hover:opacity-75 ${
+                  fridgeCards.some((fridgeCard) => fridgeCard._id === card._id)
+                    ? "opacity-50"
+                    : ""
+                }`}
               />
               <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex justify-center items-center transition-opacity duration-500 ease-in-out">
                 <p className="text-white text-lg px-4">{card.text}</p>
@@ -151,7 +161,11 @@ export default function ReceivedCards() {
               <button
                 type="button"
                 onClick={() => handlePlaceOnFridge(card)}
-                className="focus:outline-none"
+                className={`focus:outline-none ${
+                  fridgeCards.some((fridgeCard) => fridgeCard._id === card._id)
+                    ? "hidden"
+                    : ""
+                }`}
               >
                 <Image src="/send-icon.svg" alt="Send" width={26} height={26} />
               </button>
