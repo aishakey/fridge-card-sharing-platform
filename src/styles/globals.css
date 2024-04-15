@@ -8,7 +8,7 @@
 
 @layer components {
   .custom-button {
-    @apply bg-[#FFF6DF] border-2 border-[#222020] rounded-full shadow-custom text-[#222020] cursor-pointer inline-block font-bold text-lg px-1 py-1 text-center no-underline select-none hover:bg-white active:shadow-inner active:translate-x-[2px] active:translate-y-[2px] sm:min-w-[120px] sm:px-6;
+    @apply bg-[#FFF6DF] border-2 border-[#222020] rounded-full shadow-custom text-[#222020] cursor-pointer inline-block font-bold text-lg px-1 py-1 text-center no-underline select-none hover:bg-white active:shadow-inner active:translate-x-[2px] active:translate-y-[2px] sm:min-w-[120px] sm:px-6  transition duration-300 ease-in-out;
   }
 }
 
@@ -70,6 +70,25 @@ input:focus {
 
 .placeholder {
   position: absolute;
+}
+
+.animate-smile {
+  display: inline-block;
+  overflow: hidden;
+  border-right: 3px solid black;
+  white-space: nowrap;
+  width: 0;
+  animation: typeInTypeOut 2s steps(3, end) infinite;
+}
+
+@keyframes typeInTypeOut {
+  0%,
+  100% {
+    width: 0;
+  }
+  50% {
+    width: 3ch;
+  }
 }
 
 @media (min-width: 900px) {

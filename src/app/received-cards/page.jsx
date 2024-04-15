@@ -20,7 +20,7 @@ export default function ReceivedCards() {
       router.push("/");
       return;
     }
-    setIsLoading(true);
+    // setIsLoading(true);
     fetch("/api/cards/received-cards")
       .then((response) => response.json())
       .then((data) => {
@@ -88,8 +88,10 @@ export default function ReceivedCards() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <h1>Loading...</h1>
+      <div className="fixed inset-0 flex items-center justify-center bg-white">
+        <div className="text-2xl font-bold">
+          fridge <span className="animate-smile">&#58;&#41;</span>
+        </div>
       </div>
     );
   }

@@ -8,7 +8,6 @@ import { useSession, signOut } from "next-auth/react";
 export default function Navbar() {
   const { data: session, status: sessionStatus } = useSession();
   const isAuthenticated = sessionStatus === "authenticated";
-
   const pathname = usePathname();
 
   const hideOnRoutes = ["/login", "/register"];
@@ -19,7 +18,6 @@ export default function Navbar() {
   }
 
   const isSpecialColorRoute = specialColorRoutes.includes(pathname);
-
   const logoImageSrc = isSpecialColorRoute ? "/brand-white.svg" : "/brand.svg";
 
   const navbarClasses = isSpecialColorRoute
@@ -31,16 +29,21 @@ export default function Navbar() {
     : "text-darkest-custom hover:text-gray-600 font-bold text-lg"; //Default styles
 
   if (sessionStatus === "loading") {
-    return <div>Loading...</div>; // switch to loader
+    return (
+      <div className={navbarClasses} style={{ height: "50px" }}>
+        <div className="flex items-center justify-center w-full">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+        </div>
+      </div>
+    );
   }
 
   return (
     <nav className={navbarClasses}>
       <Link href="/" passHref>
-        <Image src={logoImageSrc} alt="fridge" width={100} height={50} />
+        <Image src={logoImageSrc} alt="Brand Logo" width={100} height={50} />
       </Link>
 
-      {/* Navigation Links */}
       <div className="flex items-center gap-14">
         <Link href="/about" className={linkClasses}>
           About
@@ -59,7 +62,6 @@ export default function Navbar() {
         )}
       </div>
 
-      {/* Authentication Button */}
       <div>
         {isAuthenticated ? (
           <button

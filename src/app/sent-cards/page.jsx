@@ -43,35 +43,31 @@ export default function SentCards() {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this card?"
     );
-
-    if (!isConfirmed) {
-      return;
-    }
-
+    if (!isConfirmed) return;
+    setIsLoading(true);
     try {
       const response = await fetch(`/api/cards/${cardId}`, {
         method: "DELETE",
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to delete the card.");
-      }
-
-      alert("Card was successfully deleted.");
-
+      if (!response.ok) throw new Error("Failed to delete the card.");
       setCards((currentCards) =>
         currentCards.filter((card) => card._id.toString() !== cardId)
       );
+      alert("Card was successfully deleted.");
     } catch (error) {
       console.error("Error deleting card:", error);
       alert("An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <h1>Loading...</h1>
+      <div className="fixed inset-0 flex items-center justify-center bg-white">
+        <div className="text-2xl font-bold">
+          fridge <span className="animate-smile">&#58;&#41;</span>
+        </div>
       </div>
     );
   }

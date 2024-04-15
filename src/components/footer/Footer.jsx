@@ -34,13 +34,13 @@ export default function Footer() {
           </h3>
           <ul>
             <li className="mb-2">
-              <Link href="/faq">FAQ</Link>
+              <Link href="/about">FAQ</Link>
             </li>
             <li className="mb-2">
-              <Link href="/reviews">Reviews</Link>
+              <Link href="/">Reviews</Link>
             </li>
             <li>
-              <Link href="/help">Help & Support</Link>
+              <Link href="/contact">Help & Support</Link>
             </li>
           </ul>
         </div>
@@ -52,13 +52,13 @@ export default function Footer() {
           </h3>
           <ul>
             <li className="mb-2">
-              <Link href="/pricing">Pricing</Link>
+              <Link href="/register">Account</Link>
             </li>
             <li className="mb-2">
-              <Link href="/blog">Blog</Link>
+              <Link href="/about">About</Link>
             </li>
             <li>
-              <Link href="/how-it-works">How It Works</Link>
+              <Link href="/">How It Works</Link>
             </li>
           </ul>
         </div>

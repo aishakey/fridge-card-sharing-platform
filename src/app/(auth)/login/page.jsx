@@ -20,8 +20,6 @@ export default function LoginPage() {
     }
   }, [session, router]);
 
-  if (session) return null; //switch to loader
-
   const handleLogin = async (e) => {
     e.preventDefault();
 

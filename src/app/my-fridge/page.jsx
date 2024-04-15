@@ -50,14 +50,6 @@ export default function MyFridgePage() {
     };
   }, [sessionStatus]);
 
-  if (sessionStatus === "loading") {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        Loading...
-      </div>
-    );
-  }
-
   const handleRemoveCardClick = (cardId) => {
     setSelectedCardId(cardId);
     setShowModal(true);
