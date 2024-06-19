@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Fridge
+
+Fridge is a full-stack project built using Next.js and Tailwind CSS. This application allows users to send cards, receive them, and post them on their virtual fridge.
+
+## Features
+
+- **Send Cards**: Users can create and send virtual cards to others.
+- **Receive Cards**: Users can receive cards from others.
+- **Virtual Fridge**: Users can post received cards on their virtual fridge.
+- **Reorder Cards**: Users can reorder cards, delete them, or put them back in the "Recieved Cards" section.
+
+## Technologies Used
+
+- **Next.js**
+- **Tailwind CSS**
+- **MongoDB**
+- **0Auth**
+- **S3 Buckets**
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Ensure you have the following installed on your local machine:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Node.js 
+- npm or yarn
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. **Clone the repository:**
 
-## Learn More
+    ```bash
+    git clone https://github.com/aishakey/fridge-card-sharing-platform.git
+    cd fridge
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Install dependencies:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. **Run the development server:**
 
-## Deploy on Vercel
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Usage
+
+1. **Sending a Card:**
+
+    - Navigate to the "Send Card" page.
+    - Fill in the recipient's details and your message.
+    - Click "Send" to send the card.
+
+2. **Receiving a Card:**
+
+    - Check your inbox on the "Received Cards" page.
+    - Open any received card to view it.
+
+3. **Posting on Virtual Fridge:**
+
+    - Select a received card.
+    - Click "Post on Fridge" to add it to your virtual fridge.
+
+
+## Project Link
+
+Check out the live project [here](https://fridge-card-sharing-platform.vercel.app/).
+
